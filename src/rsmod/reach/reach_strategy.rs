@@ -30,7 +30,7 @@ impl ReachStrategy {
     }
 
     #[inline(always)]
-    fn altered_rotation(angle: u8, shape: i8) -> u8 {
+    pub fn altered_rotation(angle: u8, shape: i8) -> u8 {
         return if shape == 7 { (angle + 2) & 0x3 } else { angle };
     }
 
@@ -98,7 +98,7 @@ impl ReachStrategy {
     }
 
     #[inline(always)]
-    unsafe fn reach_rectangle(
+    pub unsafe fn reach_rectangle(
         flags: &CollisionFlagMap,
         y: i32,
         src_x: i32,
@@ -130,38 +130,38 @@ impl ReachStrategy {
             1 => {
                 collides
                     || reach_rectangle_1(
-                        flags,
-                        y,
-                        src_x,
-                        src_z,
-                        dest_x,
-                        dest_z,
-                        rotated_width,
-                        rotated_height,
-                        rotated_block_access,
-                    )
+                    flags,
+                    y,
+                    src_x,
+                    src_z,
+                    dest_x,
+                    dest_z,
+                    rotated_width,
+                    rotated_height,
+                    rotated_block_access,
+                )
             }
             _ => {
                 collides
                     || reach_rectangle_n(
-                        flags,
-                        y,
-                        src_x,
-                        src_z,
-                        dest_x,
-                        dest_z,
-                        src_size,
-                        src_size,
-                        rotated_width,
-                        rotated_height,
-                        rotated_block_access,
-                    )
+                    flags,
+                    y,
+                    src_x,
+                    src_z,
+                    dest_x,
+                    dest_z,
+                    src_size,
+                    src_size,
+                    rotated_width,
+                    rotated_height,
+                    rotated_block_access,
+                )
             }
         };
     }
 
     #[inline(always)]
-    unsafe fn reach_exclusive_rectangle(
+    pub unsafe fn reach_exclusive_rectangle(
         flags: &CollisionFlagMap,
         y: i32,
         src_x: i32,
@@ -193,32 +193,32 @@ impl ReachStrategy {
             1 => {
                 !collides
                     && reach_rectangle_1(
-                        flags,
-                        y,
-                        src_x,
-                        src_z,
-                        dest_x,
-                        dest_z,
-                        rotated_width,
-                        rotated_height,
-                        rotated_block_access,
-                    )
+                    flags,
+                    y,
+                    src_x,
+                    src_z,
+                    dest_x,
+                    dest_z,
+                    rotated_width,
+                    rotated_height,
+                    rotated_block_access,
+                )
             }
             _ => {
                 !collides
                     && reach_rectangle_n(
-                        flags,
-                        y,
-                        src_x,
-                        src_z,
-                        dest_x,
-                        dest_z,
-                        src_size,
-                        src_size,
-                        rotated_width,
-                        rotated_height,
-                        rotated_block_access,
-                    )
+                    flags,
+                    y,
+                    src_x,
+                    src_z,
+                    dest_x,
+                    dest_z,
+                    src_size,
+                    src_size,
+                    rotated_width,
+                    rotated_height,
+                    rotated_block_access,
+                )
             }
         };
     }
@@ -305,13 +305,13 @@ impl ReachStrategy {
                     } else if src_x == dest_x
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::BLOCK_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x
                         && src_z == dest_z - 1
                         && (collisionFlags & CollisionFlag::BLOCK_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -323,13 +323,13 @@ impl ReachStrategy {
                     } else if src_x == dest_x - 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x + 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -341,13 +341,13 @@ impl ReachStrategy {
                     } else if src_x == dest_x
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::BLOCK_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x
                         && src_z == dest_z - 1
                         && (collisionFlags & CollisionFlag::BLOCK_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -359,13 +359,13 @@ impl ReachStrategy {
                     } else if src_x == dest_x - 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x + 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -382,13 +382,13 @@ impl ReachStrategy {
                     } else if src_x == dest_x + 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x
                         && src_z == dest_z - 1
                         && (collisionFlags & CollisionFlag::BLOCK_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -398,7 +398,7 @@ impl ReachStrategy {
                     if src_x == dest_x - 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x && src_z == dest_z + 1 {
@@ -408,7 +408,7 @@ impl ReachStrategy {
                     } else if src_x == dest_x
                         && src_z == dest_z - 1
                         && (collisionFlags & CollisionFlag::BLOCK_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -418,13 +418,13 @@ impl ReachStrategy {
                     if src_x == dest_x - 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::BLOCK_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x + 1 && src_z == dest_z {
@@ -440,13 +440,13 @@ impl ReachStrategy {
                     } else if src_x == dest_x
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::BLOCK_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x + 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x && src_z == dest_z - 1 {
@@ -506,14 +506,14 @@ impl ReachStrategy {
                         && dest_x <= east
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::BLOCK_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if dest_x >= src_x
                         && dest_x <= east
                         && src_z == dest_z - src_size as i32
                         && (collisionFlags & CollisionFlag::BLOCK_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -526,14 +526,14 @@ impl ReachStrategy {
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x + 1
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -546,14 +546,14 @@ impl ReachStrategy {
                         && dest_x <= east
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::BLOCK_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if dest_x >= src_x
                         && dest_x <= east
                         && src_z == dest_z - src_size as i32
                         && (collisionFlags & CollisionFlag::BLOCK_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -566,14 +566,14 @@ impl ReachStrategy {
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x + 1
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -591,14 +591,14 @@ impl ReachStrategy {
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if dest_x >= src_x
                         && dest_x <= east
                         && src_z == dest_z - src_size as i32
                         && (collisionFlags & CollisionFlag::BLOCK_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -609,7 +609,7 @@ impl ReachStrategy {
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if dest_x >= src_x && dest_x <= east && src_z == dest_z + 1 {
@@ -620,7 +620,7 @@ impl ReachStrategy {
                         && dest_x <= east
                         && src_z == dest_z - src_size as i32
                         && (collisionFlags & CollisionFlag::BLOCK_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -631,14 +631,14 @@ impl ReachStrategy {
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if dest_x >= src_x
                         && dest_x <= east
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::BLOCK_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x + 1 && src_z <= dest_z && north >= dest_z {
@@ -656,14 +656,14 @@ impl ReachStrategy {
                         && dest_x <= east
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::BLOCK_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x + 1
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::BLOCK_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if dest_x >= src_x && dest_x <= east && src_z == dest_z - src_size as i32
@@ -678,14 +678,14 @@ impl ReachStrategy {
                 && dest_x <= east
                 && src_z == dest_z + 1
                 && (collisionFlags & CollisionFlag::BLOCK_NORTH as u32)
-                    == CollisionFlag::OPEN as u32
+                == CollisionFlag::OPEN as u32
             {
                 return true;
             } else if dest_x >= src_x
                 && dest_x <= east
                 && src_z == dest_z - src_size as i32
                 && (collisionFlags & CollisionFlag::BLOCK_SOUTH as u32)
-                    == CollisionFlag::OPEN as u32
+                == CollisionFlag::OPEN as u32
             {
                 return true;
             } else if src_x == dest_x - src_size as i32
@@ -726,13 +726,13 @@ impl ReachStrategy {
                     if src_x == dest_x + 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::WALL_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x
                         && src_z == dest_z - 1
                         && (collisionFlags & CollisionFlag::WALL_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -742,13 +742,13 @@ impl ReachStrategy {
                     if src_x == dest_x - 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::WALL_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x
                         && src_z == dest_z - 1
                         && (collisionFlags & CollisionFlag::WALL_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -758,13 +758,13 @@ impl ReachStrategy {
                     if src_x == dest_x - 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::WALL_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::WALL_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -774,13 +774,13 @@ impl ReachStrategy {
                     if src_x == dest_x + 1
                         && src_z == dest_z
                         && (collisionFlags & CollisionFlag::WALL_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x == dest_x
                         && src_z == dest_z + 1
                         && (collisionFlags & CollisionFlag::WALL_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -838,14 +838,14 @@ impl ReachStrategy {
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::WALL_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x <= dest_x
                         && src_z == dest_z - src_size as i32
                         && east >= dest_x
                         && (collisionFlags & CollisionFlag::WALL_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -856,14 +856,14 @@ impl ReachStrategy {
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::WALL_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x <= dest_x
                         && src_z == dest_z - src_size as i32
                         && east >= dest_x
                         && (collisionFlags & CollisionFlag::WALL_NORTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -874,14 +874,14 @@ impl ReachStrategy {
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::WALL_EAST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x <= dest_x
                         && src_z == dest_z + 1
                         && east >= dest_x
                         && (collisionFlags & CollisionFlag::WALL_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
@@ -892,14 +892,14 @@ impl ReachStrategy {
                         && src_z <= dest_z
                         && north >= dest_z
                         && (collisionFlags & CollisionFlag::WALL_WEST as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     } else if src_x <= dest_x
                         && src_z == dest_z + 1
                         && east >= dest_x
                         && (collisionFlags & CollisionFlag::WALL_SOUTH as u32)
-                            == CollisionFlag::OPEN as u32
+                        == CollisionFlag::OPEN as u32
                     {
                         return true;
                     }
